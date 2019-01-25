@@ -5,3 +5,9 @@ body {
 .highlight {
     background-color: yellow;
 }
+
+.lowscore {
+    color: red;
+    font-weight: bold;
+    border-style: solid;
+}
