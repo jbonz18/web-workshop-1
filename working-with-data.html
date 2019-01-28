@@ -9,15 +9,26 @@
     <link rel="stylesheet" type="text/css" media="screen" href="shared.css" />
     <script src="data.js"></script>
 </head>
+
 <body class="container" onload="loadDataGrid()">
     <header class="jumbotron">
-        <h1>List of Students</h1>
+        <h1>List of students</h1>
     </header>
-    
-    <section class="row-fluid">
-        <section class="btn-group">
-            <button class="btn btn-primary" onclick="loadDataGrid()">Load</button>
-            <button class="btn btn-secondary" onclick="displayAverage()">Average</button>
+    <br/>
+    <section class="container">
+        <section class="row-fluid">
+            <section class="btn-group">
+                <button class="btn btn-primary" onclick="loadDataGrid()">Load</button>
+                <button class="btn btn-secondary" onclick="displayAverage()">Average</button>
+            </section>
+        </section>
+    </section>
+    <br />
+    <section class = "row-fluid">
+        <section class="container">
+            <label for="minScore">Passing Score:</label>
+            <input type="number" id="minScore" placeholder="60"/>
+            <button class="btn btn-primary" onclick="refresh()">Refresh</button>
         </section>
     </section>
     <section class="row-fluid">
@@ -35,9 +46,32 @@
             </div>
         </section>
     </section>
+    
     <section class="row-fluid">
         <section id="resultSection" class="alert alert-info">
+            <p id="paragraphAverage">
+                
+            </p>
         </section>
+    </section>
+    <br/>
+    <section class="container">
+        Please fill the following information to add a student:
+    </section>
+    <br/>
+    <section class="flex-container">
+        <label for="studentID">Student ID:</label>
+        <input type="number" id="studentID"/>
+        <br/>
+        <label for="studentName">Student Name:</label>
+        <input type="text" id="studentName"/>
+        <br/>
+        <label for="studentScore">Student Score:</label>
+        <input type="number" id="studentScore"/>
+    </section>
+    <br/>
+    <section class="container">
+        <button class="btn btn-primary" onclick="addStudent()">Add Student</button>
     </section>
 </body>
 </html>
