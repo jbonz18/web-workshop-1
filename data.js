@@ -16,11 +16,11 @@ students.forEach(student => {
     names.push(student.name);
 });
 
-document.writeln("Students are:" + names);
-//
-document.write("<pre>");
-document.writeln(`Average: ${calculateAverage()}`);
-document.write("</pre>");
+// document.writeln("Students are:" + names);
+
+// document.write("<pre>");
+// document.writeln(`Average: ${calculateAverage()}`);
+// document.write("</pre>");
 
 function calculateAverage(){
 
@@ -38,7 +38,6 @@ function loadDataGrid() {
     var i = 0;
     let dataList = document.getElementById("dataList");
     
-
     while (i < students.length)
     {
         var listItem = document.createElement("section");
@@ -51,12 +50,19 @@ function loadDataGrid() {
         var name = document.createElement("div");
         name.classList.add("col-sm");
         name.innerText =  students[i].name;
+        
+        var currentScore = students[i].score;
 
         var score = document.createElement("div");
         score.classList.add("col-sm");
         score.innerText =  students[i].score;
 
-        //console.log(students[i]);
+        var passingScore = document.getElementById("passingScoreInput").value;
+        if (currentScore <= passingScore)
+        {
+            score.classList.add("lowScore");
+        }
+        console.log(students[i]);
 
         dataList.appendChild(listItem);
 
@@ -64,15 +70,8 @@ function loadDataGrid() {
         listItem.appendChild(name);
         listItem.appendChild(score);
 
-        //Paint numbers on red when under the minimun score
-       
-        if (students[i].score < 60){
-            score.style.color = "red";
-        }
-
         i = i + 1; // Alternatively, use i++;
 
-        
         // Other ways:
         // i += 2;
         // i += 3;
@@ -81,15 +80,38 @@ function loadDataGrid() {
 
 function displayAverage()
 {
-    //var resultSection = document.getElementById("resultSection");
-    //var paragraph = document.createElement("p");
-    var paragraph = document.getElementById("paragraphAverage")
+    var resultSection = document.getElementById("resultSection");
+    var paragraph = document.createElement("p");
     paragraph.classList.add("badge"); // 2) Bootstrap classes
     paragraph.classList.add("badge-info");
 
     paragraph.innerText = "Average: " + calculateAverage();
 
     resultSection.appendChild(paragraph);
+}
+
+function refreshScores(){
+    let dataList = document.getElementById("dataList");
+
+    while (dataList.childElementCount > 1){
+        dataList.removeChild(dataList.lastChild);
+    }
+    loadDataGrid();
+}
+
+function addNewStudent()
+{
+    var scoreInput = document.getElementById("scoreInput").value;    
+    var nameInput = document.getElementById("nameInput").value;
+    var idInput = document.getElementById("idInput").value;
+
+    students.push({
+        id: idInput,
+        name: nameInput,
+        score: scoreInput
+    });
+
+    refreshScores();
 }
 
 function myReplacer(name, val) {
@@ -121,87 +143,3 @@ function loadData(){
         // i += 3;
     }
 }
-
-//Refresh cu
-function refresh(){
-    //Get minimum score from the user input, on input id "minScore"
-    var minScore = document.getElementById("minScore").value;
-    var i = 0;
-    //console.log(minScore);
-    console.log(students.length);
-    var textTable = document.getElementById("dataList").getElementsByTagName("section");
-    while (i < students.length){
-        
-        var cellScore = textTable[i].childNodes[2];
-        //console.log(cellScore);
-        
-        if (students[i].score < minScore ){
-            cellScore.style.color = "red";
-            }
-            else{
-                cellScore.style.color = "black";
-            }
-        
-        i+=1;
-    }
-}
-
-function addStudent() {
-
-    var i = 0;
-    let dataList = document.getElementById("dataList");
-    
-    var studentID = document.getElementById("studentID").value;
-    var studentName = document.getElementById("studentName").value;
-    var studentScore = parseInt(document.getElementById("studentScore").value);
-
-    students.push({id: studentID, name: studentName, score: studentScore});
-    
-    //refresh()
-
-    //loadDataGrid()
-
-    
-
-        var listItem = document.createElement("section");
-        listItem.classList.add("row");
-        
-        var id = document.createElement("div");
-        id.classList.add("col-sm");
-        id.innerHTML =  studentID;
-
-        var name = document.createElement("div");
-        name.classList.add("col-sm");
-        name.innerHTML =  studentName;
-
-        var score = document.createElement("div");
-        score.classList.add("col-sm");
-        score.innerHTML =  studentScore;
-
-        //console.log(students[i]);
-
-        dataList.appendChild(listItem);
-
-        listItem.appendChild(id);
-        listItem.appendChild(name);
-        listItem.appendChild(score);
-
-
-        
-        //students.push({id: id, name: name, score: score});
-        
-
-
-        //Paint numbers on red when under the minimun score
-       
-        // if (score < 60){
-        //     score.style.color = "red";
-        // }
-
-        // i = i + 1; // Alternatively, use i++;
-
-        
-        // Other ways:
-        // i += 2;
-        // i += 3;
-    }
