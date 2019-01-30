@@ -16,33 +16,35 @@ function onLoading(){
               
 
     shopItems.appendChild(newItem);
+
+    ready()
     
-    while (i < products.length)
-    {
-        var listItem = document.createElement("section");
-        listItem.classList.add("row");
+    // while (i < products.length)
+    // {
+    //     var listItem = document.createElement("section");
+    //     listItem.classList.add("row");
         
-        var name = document.createElement("div");
-        name.classList.add("col-sm");
-        name.innerText =  products[i].name;
+    //     var name = document.createElement("div");
+    //     name.classList.add("col-sm");
+    //     name.innerText =  products[i].name;
 
-        var price = document.createElement("div");
-        price.classList.add("col-sm");
-        price.innerText =  products[i].price;
+    //     var price = document.createElement("div");
+    //     price.classList.add("col-sm");
+    //     price.innerText =  products[i].price;
 
-        console.log(products[i]);
+    //     console.log(products[i]);
 
-        dataList.appendChild(listItem);
+    //     dataList.appendChild(listItem);
 
-        listItem.appendChild(name);
-        listItem.appendChild(price);
+    //     listItem.appendChild(name);
+    //     listItem.appendChild(price);
 
-        i = i + 1; // Alternatively, use i++;
+    //     i = i + 1; // Alternatively, use i++;
 
-        // Other ways:
-        // i += 2;
-        // i += 3;
-    }
+    //     // Other ways:
+    //     // i += 2;
+    //     // i += 3;
+    // }
 
     ready()
 
