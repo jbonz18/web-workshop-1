@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ATA FINAL EXAM</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="screen" href="shared.css" />
+    <script src="data.js"></script>
+    <!-- <script src="webservices.js"></script> -->
+</head>
+<body class="container" onload="onLoading()">
+    <header class="jumbotron" style="margin-top: 30px">
+        <div class="jumbotron-sign">
+            <h1 style="font-family:'BlackFamily'; font-size:70px; color: black">AKA-Furniture Center</h1>
+        </div>
+    </header>
+
+    
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+      Add Products to the Shopping Cart
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Catalog of Products</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">Continue</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <!-- Store program -->
+            <section class="container content-section">
+            <h2 class="section-header">Please select item:</h2>
+            <div class="shop-items" id="shop-items">
+                <!-- <div class="shop-item">
+                    <span class="shop-item-title">Bed</span>
+                    <img class="shop-item-image" src="bed.jpg">
+                    <div class="shop-item-details">
+                        <span class="shop-item-price">$225.00</span>
+                        <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                    </div> -->
+                <!-- </div>
+                <div class="shop-item">
+                    <span class="shop-item-title">Bench</span>
+                    <img class="shop-item-image" src="bench.jpg">
+                    <div class="shop-item-details">
+                        <span class="shop-item-price">$29.99</span>
+                        <button class="btn btn-primary shop-item-button"type="button">ADD TO CART</button>
+                    </div>
+                </div>
+                <div class="shop-item">
+                    <span class="shop-item-title">Couch</span>
+                    <img class="shop-item-image" src="couch.jpg">
+                    <div class="shop-item-details">
+                        <span class="shop-item-price">$50.00</span>
+                        <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                    </div>
+                </div>
+                <div class="shop-item">
+                    <span class="shop-item-title">Pillow</span>
+                    <img class="shop-item-image" src="pillow.jpg">
+                    <div class="shop-item-details">
+                        <span class="shop-item-price">$5.00</span>
+                        <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                    </div>
+                </div> -->
+            </div>
+            </section>
+            
+          </div>
+         </div>
+      </div>
+    </div>
+
+    <section class="container content-section">
+        <section class="jumbotron-cart" style="margin-top: 30px ; margin-bottom:20px ; padding-bottom:5px" >
+            <h2 class="section-header">CART SUMMARY</h2>
+            <div class="cart-row" style="margin-left: 30px">
+                <span class="cart-item cart-header cart-column">ITEM</span>
+                <span class="cart-price cart-header cart-column">PRICE</span>
+                <span class="cart-quantity cart-header cart-column">QUANTITY</span>
+            </div>
+            <div class="cart-items">
+            </div>
+            <div class="cart-total">
+                <strong class="cart-total-title">Total</strong>
+                <span class="cart-total-price">$0</span>
+            </div>
+        </section>
+    </section>
+
+    <section class="container content-section">
+        <button class="btn btn-primary btn-purchase" type="button">PURCHASE</button>
+    </section>
+
+    
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,74 +1,41 @@
-var students = [
-    {id: "1122222", name: "John", score: 90 }, // 0 {Object} => students[0] => students[0].score => total  
-    {id: "2223333", name: "Larry", score: 60 }, // 1
-    {id: "4455555", name: "Joseph", score: 50 }, // 2
-    {id: "5526666", name: "Karla", score: 80}
-];
+var products = [{"name":"bed","price":225.0},{"name":"bench","price":29.99},{"name":"chair","price":9.99},{"name":"couch","price":50.0},{"name":"pillow","price":5.0}];
 
-document.write("<h3>JSON</h3>");
-document.write("<pre class='alert alert-secondary'>"); // 1) Bootstrap class
-document.write(JSON.stringify(students, undefined, 2));
-document.write("</pre>");
-document.write("<br/>");
-var names = [];
 
-students.forEach(student => {
-    names.push(student.name);
-});
+function onLoading(){
+    var shopItems = document.getElementById("shop-items");
 
-// document.writeln("Students are:" + names);
+    console.log(shopItems);
+    var newItem = document.createElement("div");
+    newItem.innerHTML = 
+               `<span class="shop-item-title">Bed</span>
+                    <img class="shop-item-image" src="bed.jpg">
+                    <div class="shop-item-details">
+                        <span class="shop-item-price">$225.00</span>
+                        <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                    </div>`;
+              
 
-// document.write("<pre>");
-// document.writeln(`Average: ${calculateAverage()}`);
-// document.write("</pre>");
-
-function calculateAverage(){
-
-    var average = 0;
-    students.forEach(student => {
-        average = average + student.score;
-    });
-    average = average / students.length;
-
-    return average;
-}
-
-function loadDataGrid() {
-
-    var i = 0;
-    let dataList = document.getElementById("dataList");
+    shopItems.appendChild(newItem);
     
-    while (i < students.length)
+    while (i < products.length)
     {
         var listItem = document.createElement("section");
         listItem.classList.add("row");
         
-        var id = document.createElement("div");
-        id.classList.add("col-sm");
-        id.innerText =  students[i].id;
-
         var name = document.createElement("div");
         name.classList.add("col-sm");
-        name.innerText =  students[i].name;
-        
-        var currentScore = students[i].score;
+        name.innerText =  products[i].name;
 
-        var score = document.createElement("div");
-        score.classList.add("col-sm");
-        score.innerText =  students[i].score;
+        var price = document.createElement("div");
+        price.classList.add("col-sm");
+        price.innerText =  products[i].price;
 
-        var passingScore = document.getElementById("passingScoreInput").value;
-        if (currentScore <= passingScore)
-        {
-            score.classList.add("lowScore");
-        }
-        console.log(students[i]);
+        console.log(products[i]);
 
         dataList.appendChild(listItem);
 
-        listItem.appendChild(id);
         listItem.appendChild(name);
-        listItem.appendChild(score);
+        listItem.appendChild(price);
 
         i = i + 1; // Alternatively, use i++;
 
@@ -76,70 +43,131 @@ function loadDataGrid() {
         // i += 2;
         // i += 3;
     }
+
+    ready()
+
 }
 
-function displayAverage()
-{
-    var resultSection = document.getElementById("resultSection");
-    var paragraph = document.createElement("p");
-    paragraph.classList.add("badge"); // 2) Bootstrap classes
-    paragraph.classList.add("badge-info");
-
-    paragraph.innerText = "Average: " + calculateAverage();
-
-    resultSection.appendChild(paragraph);
+if (document.readyState == 'loading') {
+    document.addEventListener('DOMContentLoaded', ready)
+} else {
+    ready()
 }
 
-function refreshScores(){
-    let dataList = document.getElementById("dataList");
 
-    while (dataList.childElementCount > 1){
-        dataList.removeChild(dataList.lastChild);
+function ready() {
+    var removeCartItemButtons = document.getElementsByClassName('btn-danger')
+    for (var i = 0; i < removeCartItemButtons.length; i++) {
+        var button = removeCartItemButtons[i]
+        button.addEventListener('click', removeCartItem)
     }
-    loadDataGrid();
-}
 
-function addNewStudent()
-{
-    var scoreInput = document.getElementById("scoreInput").value;    
-    var nameInput = document.getElementById("nameInput").value;
-    var idInput = document.getElementById("idInput").value;
-
-    students.push({
-        id: idInput,
-        name: nameInput,
-        score: scoreInput
-    });
-
-    refreshScores();
-}
-
-function myReplacer(name, val) {
-    if (typeof val === 'string') {
-        return val.toString().toUpperCase();  
-     } else {
-        return val; // return as is
+    var quantityInputs = document.getElementsByClassName('cart-quantity-input')
+    for (var i = 0; i < quantityInputs.length; i++) {
+        var input = quantityInputs[i]
+        input.addEventListener('change', quantityChanged)
     }
-};
 
-// Old-way of loading data (ol). No longer used
-function loadData(){
+    var addToCartButtons = document.getElementsByClassName('shop-item-button')
+    for (var i = 0; i < addToCartButtons.length; i++) {
+        var button = addToCartButtons[i]
+        button.addEventListener('click', addToCartClicked)
+    }
 
-    var i = 0;
-    let dataList = document.getElementById("dataList");
+    document.getElementsByClassName('btn-purchase')[0].addEventListener('click', purchaseClicked)
+
+}
+
+function purchaseClicked() {
+    alert('Thank you for your purchase!! Come back soon!!')
+    var cartItems = document.getElementsByClassName('cart-items')[0]
+    while (cartItems.hasChildNodes()) {
+        cartItems.removeChild(cartItems.firstChild)
+    }
+    updateCartTotal()
+
+}
+
+function removeCartItem(event) {
+    var buttonClicked = event.target
+    buttonClicked.parentElement.parentElement.remove()
+    updateCartTotal()
+}
+
+function quantityChanged(event) {
+    var input = event.target
+    if (isNaN(input.value) || input.value <= 0) {
+        input.value = 1
+    }
+    updateCartTotal()
+}
+
+function addToCartClicked(event) {
+    var button = event.target
+    var shopItem = button.parentElement.parentElement
+    var title = shopItem.getElementsByClassName('shop-item-title')[0].innerText
+    var price = shopItem.getElementsByClassName('shop-item-price')[0].innerText
+    var imageSrc = shopItem.getElementsByClassName('shop-item-image')[0].src
+    addItemToCart(title, price, imageSrc)
+    updateCartTotal()
+}
+
+function addItemToCart(title, price, imageSrc) {
+    var cartRow = document.createElement('div')
+    cartRow.classList.add('cart-row')
+    var cartItems = document.getElementsByClassName('cart-items')[0]
+    var cartItemNames = cartItems.getElementsByClassName('cart-item-title')
+    for (var i = 0; i < cartItemNames.length; i++) {
+        if (cartItemNames[i].innerText == title) {
+            alert('This item is already added to the cart')
+            return
+        }
+    }
+    var cartRowContents = `
+        <div class="cart-item cart-column">
+            <img class="cart-item-image" src="${imageSrc}" width="100" height="100">
+            <span class="cart-item-title">${title}</span>
+        </div>
+        <span class="cart-price cart-column">${price}</span>
+        <div class="cart-quantity cart-column">
+            <input class="cart-quantity-input" type="number" value="1">
+            <button class="btn btn-danger" type="button">REMOVE</button>
+        </div>`
+    cartRow.innerHTML = cartRowContents
+    cartItems.append(cartRow)
+    cartRow.getElementsByClassName('btn-danger')[0].addEventListener('click', removeCartItem)
+    cartRow.getElementsByClassName('cart-quantity-input')[0].addEventListener('change', quantityChanged)
+}
+
+function updateCartTotal() {
+    var cartItemContainer = document.getElementsByClassName('cart-items')[0]
+    var cartRows = cartItemContainer.getElementsByClassName('cart-row')
+    var total = 0
+    for (var i = 0; i < cartRows.length; i++) {
+        var cartRow = cartRows[i]
+        var priceElement = cartRow.getElementsByClassName('cart-price')[0]
+        var quantityElement = cartRow.getElementsByClassName('cart-quantity-input')[0]
+        var price = parseFloat(priceElement.innerText.replace('$', ''))
+        var quantity = quantityElement.value
+        total = total + (price * quantity)
+    }
+    total = Math.round(total * 100) / 100
+    document.getElementsByClassName('cart-total-price')[0].innerText = '$' + total
+}
+
+function fetchData() {
+    var request = new XMLHttpRequest();
+    request.open('GET', '/api/products', true);
     
-    while (i < students.length)
-    {
-        var listItem = document.createElement("li");
-        
-        console.log(students[i]);
-        listItem.innerText = students[i].name;
-
-        dataList.appendChild(listItem);
-        i = i + 1; // Alternatively, use i++;
-
-        // Other ways:
-        // i += 2;
-        // i += 3;
-    }
+    request.onload = function() {
+      if (request.status !== 200) {
+        body.innerHTML = 'An error occurred during your request: ' +  request.status + ' ' + request.statusText;
+        return;
+      }
+      renderTable(JSON.parse(request.responseText));
+    };
+    request.onerror = function() {
+        body.innerHTML = 'An error occurred during your request: ' +  request.status + ' ' + request.statusText;
+    };
+    request.send();
 }
