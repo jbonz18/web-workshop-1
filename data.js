@@ -12,6 +12,13 @@ function onLoading(){
                     <div class="shop-item-details">
                         <span class="shop-item-price">$225.00</span>
                         <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                    </div>
+    
+                <span class="shop-item-title">Bench</span>
+                     <img class="shop-item-image" src="bench.jpg">
+                     <div class="shop-item-details">
+                        <span class="shop-item-price">$29.99</span>
+                        <button class="btn btn-primary shop-item-button"type="button">ADD TO CART</button>
                     </div>`;
               
 
@@ -45,9 +52,7 @@ function onLoading(){
     //     // i += 2;
     //     // i += 3;
     // }
-
-    ready()
-
+    
 }
 
 if (document.readyState == 'loading') {
